@@ -1,0 +1,469 @@
+%TEMPLATE
+%for Spring School 2025
+%Don't change any macros given.
+%The first place for your change is below line 250.
+%See you at Spring School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DO NOTÂ CHANGEÂ THIS
+%
+\documentclass[12pt]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%PACKAGES
+%basic
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage[unicode]{hyperref}%%sazba url
+%apperance
+%\usepackage{fullpage}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage{multicol}  %% for multiple columns in text
+%schedule
+\usepackage[usenames,dvipsnames]{color}
+%math and usefull packages
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage[linesnumbered, vlined]{algorithm2e}%algorithms
+% tikz
+\usepackage{tikz}
+
+
+%%%% by participants:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TITLE
+\makeatletter
+
+\def\pen{\penalty10000}
+
+
+\newdimen\HeaderBoxMargin
+\HeaderBoxMargin=3pt
+
+\def\HeaderBox#1{
+  \hbox{%
+    \vrule width 0.4pt \hglue -0.4pt%
+    \vbox{%
+      \hrule height 0.4pt\pen\vskip0.5mm\hrule height 0.4pt\pen\smallskip%
+      \begin{center}%
+        % velmi velmi oĹˇklivĂ˝ hack, aby se text nedotĂ˝kal stran
+        \leftskip=\the\HeaderBoxMargin plus 1fil%
+        \rightskip=\the\HeaderBoxMargin plus 1fil%
+        #1%
+      \end{center}%
+      \medskip\hrule height 0.4pt%
+    }%
+    \hglue -0.4pt \vrule width 0.4pt%
+  }%
+  \pen\smallskip%
+}
+
+
+\def\chapter*#1{\Heading{#1}}%
+
+
+\long\def\literaturestart#1\literatureend{{
+  \def\chapter*##1{\section{##1}\vspace*{-\parskip}}
+  \begin{thebibliography}{9}
+  \footnotesize\normalfont
+    #1
+  \end{thebibliography}
+}}
+
+
+% sĂˇzenĂ­ section v obsahu vlevo a ne odsazenÄ›
+\def\l@section{\@dottedtocline{1}{0em}{2.3em}}
+
+% okouĹˇe mezery z konce argumentu (protoĹľe unskip nefunguje v pdf obsahu)
+\def\Trim@Impl#1#2 \end#3\Trim@End{\ifx\end#3\end#1\else\Trim{#2}\fi}
+\def\Trim#1{\Trim@Impl{#1}#1\end{} \end\Trim@End}
+
+
+\newcommand{\Heading}[1]{
+\begin{center}
+\bf \LARGE #1
+\end{center}
+\bigskip
+\bigskip
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TITLE type
+
+% jen obalĂ­ argumenty \Trim{} a pokud je #1 prĂˇzdnĂ©
+% tak ho nastavĂ­ na \Trim{#2}\Trim{#3}
+\long\def\Id#1\FirstName#2\Surname#3\Email#4\Serie#5\Title#6%
+         \PaperAuthor#7\Link#8\Text#9\End{{%
+  \IdImpl\ifx\XXX#1\XXX\Trim{#2}\Trim{#3}\else\Trim{#1}\fi
+    \FirstName\Trim{#2}\Surname\Trim{#3}\Email\Trim{#4}%
+    \Serie\Trim{#5}\Title\Trim{#6}%
+    \PaperAuthor\Trim{#7}\Link\Trim{#8}\Text #9\End%
+  }}
+
+\def\Id@title#1{\medskip\\{\Large #1}}
+
+\long\def\IdImpl#1\FirstName#2\Surname#3\Email#4\Serie#5\Title#6%
+         \PaperAuthor#7\Link#8\Text#9\End{{%
+  \def\nop{\Trim{}}%
+  \def\testemail{#4}%
+  \def\testserie{#5}%
+  \def\testpaper{#7}%
+  \def\testlink{#8}%
+  %
+  \phantomsection%
+  \HeaderBox{%
+    {\Large #2 #3}\pen%
+    \ifx\testemail\nop\else%
+      \smallskip\\{\tt #4}\pen%
+    \fi%
+    \ifx\testpaper\nop\else%
+      \smallskip\\{Presented paper by #7}\pen%
+    \fi%
+    \ifx\testserie\nop%
+      \Id@title{#6}%
+      \addcontentsline{toc}{section}{#6 (\nobreak{#2} \nobreak{#3})}%
+    \else%
+      \Id@title{#6\penalty-2{} {\it as part of series} #5}%
+      \addcontentsline{toc}{section}{#5: #6 (\nobreak{#2} \nobreak{#3})}%
+    \fi%
+    \ifx\testlink\nop\else%
+      \smallskip\\{(\texttt{#8})}\pen%
+    \fi%
+    \label{#1}%
+  }%
+  \setcounter{theorem}{0}%
+  {#9}%
+}}
+
+%name surname email {Title}
+\newcommand{\Talk}[4]{%
+  \Id\FirstName #1 \Surname #2 \Email #3
+  \Serie
+  \Title #4
+  \PaperAuthor
+  \Link
+  \Text\End
+}
+%name surname email {author of the paper}{Title}{link}
+\newcommand{\PaperTalk}[6]{%
+  \Id\FirstName #1 \Surname #2 \Email #3
+  \Serie
+  \Title #5
+  \PaperAuthor #4
+  \Link #6
+  \Text\End
+}
+%name surname email {author of the paper}{Title}{Serie}{link}
+\newcommand{\SeriesTalk}[7]{%
+  \Id\FirstName #1 \Surname #2 \Email #3
+  \Serie #6
+  \Title #5
+  \PaperAuthor #4
+  \Link #7
+  \Text\End
+}
+%name surname email {Title}{Serie}
+\newcommand{\SeriesOther}[5]{%
+  \Id\FirstName #1 \Surname #2 \Email #3
+  \Serie #5
+  \Title #4
+  \PaperAuthor
+  \Link
+  \Text\End
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Schedule macros
+%Schaduled Talk: Talk Speaker_Name Speaker_Surname Time Duration 
+\def\ST#1#2#3#4#5{\Event{#5}{#1}{#2 #3 \hskip 0pt plus 0.5fil \mbox{#4} \hskip 0pt plus 0.5fil \pageref{#2#3}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math enviroment definition.
+\newcounter{theorem}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newenvironment{proof}{\par\textbf{Proof}}{ \rule{1pt}{0pt}   \hfill $\square$ \\}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{note}[theorem]{Note}
+
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{exercise}[theorem]{Exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dela sekce v jednotlivych kouskach sbornicku
+\def\subsection#1{\par Not good idea. \smallskip}
+\def\section#1{\vskip 9pt plus 2pt minus 1pt\centerline{\bf #1}\par\ignorespaces}
+\def\paragraph#1{\par{\bf #1}\hskip 0.5em\ignorespaces}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Pro formatovani odstavcu
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt minus 1pt} % smallskip  size (was 0.5em)
+\setlength{\parsep}{\parskip}
+\def\sirka{0.89\textwidth}
+
+\let\trivlist@old\trivlist
+%\def\trivlist{\parskip=0pt\partopsep=0pt\trivlist@old}
+
+\let\normalsize@old\normalsize
+\def\normalsize{%
+  \normalsize@old%
+  \setlength{\abovedisplayskip}{5pt plus 3pt minus 2pt}% def 10 +2 -5 pt
+  \setlength{\belowdisplayskip}{5pt plus 3pt minus 2pt}% def 10 +2 -5 pt
+  \setlength{\abovedisplayshortskip}{0pt plus 3pt}% def 0 +3 pt
+  \setlength{\belowdisplayshortskip}{0pt plus 3pt}% def 6 +3 -3 pt
+}
+
+\setlength{\itemsep}{0pt} % def 4.0pt plus 2.0pt minus 1.0pt
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+
+%% Makro pro vkladani prispevku
+\newcommand{\prispevek}[1]{
+	\input{prispevky/#1}\vskip 3em
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Math macros
+\newcommand{\T}[1]{#1^\top\!} 
+\newcommand{\calO}{{\mathcal O}}
+
+\newcommand{\NP}{\ensuremath{\mathrm{NP}}}
+\newcommand{\FPT}{\ensuremath{\mathrm{FPT}}}
+\newcommand{\Pp}{\ensuremath{\mathrm{P}}}
+
+\def\epsilon{\varepsilon}
+\def\phi{\varphi}
+
+\pdfstringdefDisableCommands{%
+  \def\chi{\textchi}%
+  \def\Delta{\textDelta}%
+  \def\omega{\textomega}%
+}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ENDÂ OF DOÂ NOTÂ CHANGEÂ THIS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Your macros
+%Please use as few as possible.
+%\newcommand{\mbb}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\floorphi}{\ensuremath{\floor{\phi}\hspace{-0.5ex}}}
+%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Your packages
+%Please use as few as possible.
+% \usepackage{yourfavouritepackage}
+%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DOCUMENT
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Please fill the informations
+% Choose only one of the following macros and comment out the rest.
+% If you will present someones paper
+%\PaperTalk{Your Name}{Surname}{your@email.cz}{Author of the article}{The Title}{http://link.springer.com/article/10.1007\%2FBF02579200}
+%If you present a paper as a part of series.
+%\SeriesTalk{Your Name}{Surname}{your@email.cz}{Author of the article}{The Title}{The Best Series}{http://link.springer.com/article/10.1007\%2FBF02579200}
+%Other talk as a part of series.
+%\SeriesOther{Your Name}{Surname}{your@email.cz}{The Title}{The Best Series}
+%Some other talk
+\Talk{Richard}{Mužík}{richard@imuzik.cz}{Integer cooperative game theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The beginning of your write up.
+\section{Introduction}
+In this talk, we explore cooperative game theory in the context of integer-valued utilities and outcomes.
+Motivated by the realism of indivisible resources, we examine how integer constraints impact both game properties and solution concepts.
+We introduce and study two new classes of games—c-bounded and c-tight—and analyze their connections to established concepts like convexity and superadditivity.
+Additionally, we propose several new integer-valued analogues of the Shapley value and compare their properties with the classical version.
+The talk also includes an investigation of the nucleolus in the integer setting, highlighting key differences from the traditional, real-valued approach.
+
+\begin{definition}
+    The \emph{integer cooperative game} is a pair $(N, v_I)$, where $N$ is a finite set of players and $v_I: 2^N \to \mathbb{Z}$ is a characteristic function.
+    Furthermore, $v_I(\emptyset) = 0$.
+\end{definition}
+
+\begin{definition}
+    For integer cooperative game $G_I \in \mathcal{G}_I^n$, the following sets are defined:
+    \begin{itemize}
+        \item \emph{Integer imputation set}: $\mathcal{I}_{\mathbb{Z}}(G_I) = \mathcal{I}(G_I) \cap \mathbb{Z}^{n}$,
+        \item \emph{Integer dual imputation set}: $\mathcal{I}_{\mathbb{Z}}^{\star}(G_I) = \mathcal{I}^{\star}(G_I) \cap \mathbb{Z}^{n}$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    \label{def:c-tight}
+    Let $c \in \mathbb{N}_0$.
+    A cooperative game $(N,v)$ is \emph{$c$-tight} if it holds that
+    \begin{displaymath}\label{eq:c-tight}
+        \forall S \subseteq N: 0 \leq v(S) \leq c \land v(N) = c.
+    \end{displaymath}
+\end{definition}
+
+\begin{definition}
+    \label{def:c-bounded}
+    Let $c \in \mathbb{N}_0$.
+    A cooperative game $(N,v)$ is \emph{$c$-bounded} if it holds that
+    \begin{displaymath}\label{eq:c-bounded}
+        \forall S \subseteq N: 0 \leq v(S) \leq c.
+    \end{displaymath}
+\end{definition}
+
+\begin{theorem}
+    \label{theorem:number_of_k_games_c-tight}
+    Let $c, n, k \in \mathbb{N}$ and $k \leq n$. The number of $c$-tight integer $k$-games is given by
+    \begin{displaymath}
+        \binom{\binom{n}{k}-1+c}{c}.
+    \end{displaymath}
+\end{theorem}
+
+\begin{definition}
+    \label{def:floor_shapley_value}
+    For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \emph{Floor Shapley value} $\floorphi(G_I)$ is given by
+
+    \vspace{-1cm}
+    \begin{displaymath}
+        \floorphi(G_I) = \floor{\phi(G_I)}.
+    \end{displaymath}
+\end{definition}
+
+
+\begin{definition}
+    \label{def:efficient_floor_shapley_value}
+    For an integer cooperative game $G_I=(N,v_I) \in \mathcal{G}_I^n$, the \emph{Efficient Floor Shapley value} $\phi^E(G_I)$ is defined as follows:
+    \begin{enumerate}
+        \item Compute the Floor Shapley value $\floorphi(G_I)$ and the Shapley value $\phi(G_I)$.
+        \item Compute the weights $w_i = \phi_i(G_I) - \floorphi_i(G_I)$ for all $i \in N$.
+        \item Sort the weights in descending order such that if multiple players have the same weight, then their ordering is uniformly random.
+        \item Each player receives his Floor Shapley value. Additionally, the top $k$ players, where $k = v_I(N) - \sum_{i \in N} \floorphi_i(v_I) = w(N)$, receive one extra unit.
+    \end{enumerate}
+\end{definition}
+
+
+\begin{definition}
+    \label{def:probabilistic_efficient_floor_shapley_value}
+    For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \emph{Probabilistic Efficient Floor Shapley value} $\phi^{\mathbb{E}}(v)$ is defined as follows:
+    \begin{enumerate}
+        \item Compute the Floor Shapley value $\floorphi(G_I)$ and the Shapley value $\phi(G_I)$.
+        \item Compute the remainders $\tilde{p}_i = \phi_i(G_I) - \floorphi_i(G_I)$ for all $i \in N$.
+        \item Compute the probabilities $p_i = \frac{\tilde{p}_i}{\sum_{j \in N} \tilde{p}_j}$ for all $i \in N$.
+        \item Each player receives his Floor Shapley value and additionally, each unit of the remainder with probability $p_i$, i.e., each unit of $\tilde{p}(N)=\sum_{j \in N} \tilde{p}_j$ is given to player $i$ with probability $p_i$.
+    \end{enumerate}
+\end{definition}
+
+
+\begin{theorem}
+    \label{theorem:probabilistic_efficient_floor_shapley_properties}
+    The Probabilistic Efficient Floor Shapley value $\phi^{\mathbb{E}}$  satisfies the following properties for all integer games $(N,v_I),(N,w_I) \in \mathcal{G}_I^n$:
+    \begin{enumerate}
+        \item The expected value is the same as the Shapley value:
+            \begin{displaymath}
+                \label{eq:probabilistic_efficient_floor_shapley_properties:expected_value}
+                \mathbb{E}[\phi^{\mathbb{E}}(v_I)] = \phi(v_I),
+            \end{displaymath}
+        \item Axiom of efficiency:
+            \begin{displaymath}
+                \sum_{i \in N}\phi_{i}^{\mathbb{E}}(v_I) = v_I(N),
+            \end{displaymath}
+        \item Axiom of expected symmetry:
+            \begin{displaymath}
+                \forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \mathbb{E}[\phi_{i}^{\mathbb{E}}(v_I)] = \mathbb{E}[\phi_{j}^{\mathbb{E}}(v_I)],
+            \end{displaymath}
+        \item Axiom of null player:
+            \begin{displaymath}
+                \forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^{\mathbb{E}}(v_I) = 0,
+            \end{displaymath}
+        \item Axiom of expected additivity:
+            \begin{displaymath}
+                \mathbb{E}[\phi^{\mathbb{E}}(v_I+w_I)] = \mathbb{E}[\phi^{\mathbb{E}}(v_I)] + \mathbb{E}[\phi^{\mathbb{E}}(w_I)].
+            \end{displaymath}
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    \label{def:CLS}
+    Let $||\bullet||$ be a vector norm. The \emph{Closest Lattice Shapley (CLS)} value of integer cooperative game $G_I \in \mathcal{G}_I^n$ is given by
+        $\phi^\mathcal{W}(G_I)  = \min_{x \in \mathcal{W}_\mathbb{Z}(G_I)} ||\phi(G_I) - x||$.
+
+\end{definition}
+
+\begin{proposition}
+    The CLS value:
+    \begin{itemize}
+        \item exists for all integer games $G_I \in \mathcal{G}_I^n$,
+        \item is not unique in general,
+        \item depends on the choice of the norm,
+        \item is different from the Efficient Floor Shapley value.
+    \end{itemize} 
+\end{proposition}
+
+
+\begin{definition}
+    \label{def:integer_nucleolus}
+    For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \emph{integer nucleolus} $\eta_\mathbb{Z}(G_I)$ is defined as
+    \begin{displaymath}
+        \eta_{\mathbb{Z}}(G_I) = \left\{ x \in \mathcal{I}_\mathbb{Z}(G_I) \mid \forall y \in \mathcal{I}_\mathbb{Z}(G_I): \Theta_\mathbb{Z}(x) \preceq_{lex} \Theta_\mathbb{Z}(y)\right\}.
+    \end{displaymath}
+\end{definition}
+
+\begin{theorem}
+    \label{thm:integer_nucleolus_existence}
+    For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
+
+    \begin{displaymath}
+        \mathcal{I}_{\mathbb{Z}}(G_I) \neq \emptyset \implies \eta_\mathbb{Z}(G_I) \neq \emptyset.
+    \end{displaymath}
+\end{theorem}
+
+\begin{theorem}\label{thm:integer_nucleolus_nonemptiness}
+    For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
+    \begin{displaymath}
+        \eta_\mathbb{Z}(G_I) \neq \emptyset \iff \eta(G_I) \neq \emptyset.
+    \end{displaymath}
+\end{theorem}
+
+\begin{theorem}
+    \label{thm:integer_nucleolus_not_unique}
+    For an integer cooperative game $G_I \in \mathcal{G}_I^n$ the nucleolus is not necessarily a single point solution concept.
+\end{theorem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%In case you would like to have some refences.
+%It is usually not necessary.
+%Please, uncomment/comment start and end of the bibliography
+%\literaturestart
+	
+%please add a literature in given format as in examples:
+%\bibitem{latexcompanion} 
+%Michel Goossens, Frank Mittelbach, and Alexander Samarin. 
+%\textit{The \LaTeX\ Companion}. 
+%Addison-Wesley, Reading, Massachusetts, 1993.
+% 
+% 
+%\bibitem{knuthwebsite} 
+%Knuth: Computers and Typesetting,
+%\\\texttt{http://www-cs-faculty.stanford.edu/\~{}uno/abcde.html}
+
+%\literatureend
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%end of the document
+%PLEASEÂ DO NOTÂ CHANGE
+\end{document}
