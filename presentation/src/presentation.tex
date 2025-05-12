@@ -1,0 +1,580 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Focus Beamer Presentation
+% LaTeX Template
+% Version 1.0 (8/8/18)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Pasquale Africa (https://github.com/elauksap/focus-beamertheme) with modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% Template license:
+% GNU GPL v3.0 License
+%
+% Important note:
+% The bibliography/references need to be compiled with bibtex.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass{beamer}
+%\documentclass[handout]{beamer}
+
+\usepackage{mathtools}
+\usepackage{comment}
+
+\usetheme{focus} % Use the Focus theme supplied with the template
+% Add option [numbering=none] to disable the footer progress bar
+% Add option [numbering=fullbar] to show the footer progress bar as always full with a slide count
+
+% Uncomment to enable the ice-blue theme
+%\definecolor{main}{RGB}{92, 138, 168}
+%\definecolor{background}{RGB}{240, 247, 255}
+
+\definecolor{mygreen}{RGB}{0, 128, 0}
+\definecolor{myblue}{RGB}{51, 51, 204}
+\definecolor{myviolet}{RGB}{255, 0, 255}
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{mygreen}{#1}}
+\newcommand{\blue}[1]{\textcolor{myblue}{#1}}
+\newcommand{\violet}[1]{\textcolor{myviolet}{#1}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rn}[1][n]{\mathbb{R}^{#1}}
+\newcommand{\bx}{\textbf{x}}
+\newcommand{\by}{\textbf{y}}
+\newcommand{\bz}{\textbf{z}}
+\newcommand{\bu}{\textbf{u}}
+\newcommand{\bv}{\textbf{v}}
+\newcommand{\I}{\mathcal{I}}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\floorphi}{\ensuremath{\floor{\phi}\hspace{-0.5ex}}}
+
+\DeclareMathOperator{\E}{\mathbb{E}\,}
+
+%------------------------------------------------
+
+\usepackage{booktabs} % Required for better table rules
+%\usepackage{slashbox}
+%\usepackage{ulem,centernot}
+
+
+%----------------------------------------------------------------------------------------
+%	 TITLE SLIDE
+%----------------------------------------------------------------------------------------
+
+\title{Integer cooperative game theory}
+
+\author{Richard Mužík}
+
+\titlegraphic{\hspace*{5cm}\includegraphics[scale=0.5]{../img/logo-en.pdf}} % Optional title page image, comment this line to remove it
+
+\institute{richard@imuzik.cz}
+
+
+%------------------------------------------------
+
+\begin{document}
+
+%------------------------------------------------
+
+\begin{frame}
+	\maketitle % Automatically created using the information in the commands above
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	 SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Introduction} % Section title slide, unnumbered
+
+%------------------------------------------------
+
+\begin{frame}{Cooperative game theory}
+    \pause
+
+    \begin{block}{Cooperative game}
+        A \textbf{cooperative game} is an ordered pair $(N,v)$, where $N=\{1,\dots,n\}$ is a finite set of players and $v\colon 2^N \to \mathbb{R}$ is the characteristic function.
+        Further, $v(\emptyset) = 0$.
+    \end{block}
+
+    \begin{itemize}
+        \item $S \subseteq N$ ... coalition
+        \item $v(S)$ ... values of coalition
+    \end{itemize}
+
+    \pause
+
+    Goal: \textit{To distribute the value of the game among players}
+
+    \pause
+
+    \begin{itemize}
+	    \item \textbf{Payoff vector} $\bx \in \Rn$
+	    \begin{itemize}
+	        \item $x_i$ represents payoff of player $i$
+	    \end{itemize}
+        \pause
+	    \item Vector $\bx \in \Rn$ is \textbf{efficient}, if $\sum_{i \in N}x_i = v(N)$
+	    \begin{itemize}
+	        \item Usually, we distribute $v(N)$
+	    \end{itemize}
+	    \item Vector $\bx \in \Rn$ is \textbf{individually rational}, if $x_i \geq v(i)$
+	    \begin{itemize}
+	        \item players prefer $x_i$ over $v(i)$
+	    \end{itemize}
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Cooperative game theory - solution concepts}
+    \pause
+
+    \textit{But firstly...}
+
+    \pause
+
+    \begin{block}{Imputation set}
+        For cooperative game $(N,v)$, we define the following sets:
+        \begin{itemize}
+            \item \textbf{Preimputation}: $\I^*(v) = \left\{x \in \Rn \mid x(N) = v(N) \right\}$
+            \item \textbf{Imputation}: $\I(v) = \left\{x \in \I^*(v) \mid \forall i \in N: x_i \geq v(i)\right\}$
+        \end{itemize} 
+    \end{block}
+
+    \pause
+
+    \textit{Possible fair solution...}
+
+    \pause
+
+    \begin{block}{The Shapley value}
+        For a cooperative game $(N,v)$, the \textbf{Shapley value} $\phi(v)$ of player $i$ is
+        \begin{displaymath}
+            \phi_i(v) = \sum_{S \subseteq N \setminus i}\frac{s!(n-s-1)!}{n!}\left(v(S \cup i) - v(S)\right)    
+        \end{displaymath}
+        
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Cooperative game theory - solution concepts}
+    \pause
+
+    \begin{block}{Excess}
+            Let $(N,v)$ be an essential game, i.e., $v(N) \geq \sum_{i \in N}v(i)$, $x \in \mathcal{I}(v)$ and $\emptyset \neq S \subseteq N$.
+            The \emph{excess $e(S,x,v)$ of coalition $S$ in game $(N,v)$ with respect to payoff vector $x$} is defined as $e(S,x,v) = v(S) - x(S)$.
+    \end{block}
+
+    \pause
+
+    \begin{itemize}
+        \item We further need to define the \emph{vector of excesses} for every $x \in \mathbb{R}^n$ as $\Theta(x)=\left(e(S_1,x,v), \dots, e(S_{2^{n}-2},x,v)\right)$, where the excesses are ordered in decreasing order.
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Nucleolus}
+        For a cooperative game $(N,v)$, the \emph{nucleolus} $\eta(v)$ is defined as
+        \begin{displaymath}
+            \eta(v) = \left\{ x \in \mathcal{I}(v) \mid \forall y \in \mathcal{I}(v): \Theta(x) \preceq_{lex} \Theta(y)\right\},
+        \end{displaymath}
+        where $\preceq_{lex}$ is the lexicographical ordering of vectors.
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Cooperative game theory - integer setting}
+    \pause
+
+    \textit{The goal of integer cooperative game theory is to study and find integer solution concepts...}
+
+    \pause
+
+    \begin{block}{Integer cooperative game}
+        The \textbf{integer cooperative game} is a pair $(N, v_I)$, where $N$ is a finite set of players and $v_I: 2^N \to \Z$ is a characteristic function.
+        Furthermore, $v_I(\emptyset) = 0$.
+    \end{block}
+
+    \pause
+
+    \begin{itemize}
+        \item Does not ensure the integrality of the solution concepts
+        \item Introduce new solution concepts based on the already known ones, ensuring integrality
+    \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Cooperative game theory - integer setting}
+
+    \pause
+
+    \textit{Multi point sets...}
+
+    \pause
+
+    \begin{block}{Imputation set}
+        For integer cooperative game $G_I \in \mathcal{G}_I^n$, the \emph{Integer imputation set} set is defined as $\mathcal{I}_{\Z}(G_I) = \mathcal{I}(G_I) \cap \Z^{n}$.
+    \end{block}
+
+    \pause
+
+    \begin{block}{Solution concepts}
+        For integer cooperative game $G_I \in \mathcal{G}_I^n$, the following solution concepts are defined:
+        \begin{itemize}
+            \item \emph{Integer core}: $\mathcal{C}_{\Z}(G_I) = \mathcal{C}(G_I) \cap \Z^{n}$,
+            \item \emph{Integer D-Core}: $DC_{\Z}(G_I) = \mathcal{I}_{\Z}(G_I) \setminus dom(\mathcal{I}_{\Z}(G_I))$,
+            \item \dots
+        \end{itemize}
+    \end{block}
+
+    \pause
+
+    \textit{These solution concepts were already studied in the past...}
+\end{frame}
+
+%------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	 SECTION 3
+%----------------------------------------------------------------------------------------
+
+\section{Results}
+
+%------------------------------------------------
+
+\begin{frame}{Floor Shapley value}
+    \pause
+
+    \begin{block}{Floor Shapley value}
+        For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \textbf{Floor Shapley value} $\floorphi(G_I)$ is given by $\floorphi(G_I) = \floor{\phi(G_I)}$.
+    \end{block}
+
+    \pause
+
+    \begin{block}{Theorem $16$}
+        The Floor Shapley value $\floorphi(v_I)$ satisfies the following properties for all integer games $(N,v_I),(N,w_I) \in \mathcal{G}_I^n$:
+        \begin{enumerate}
+            \item Axiom of near efficiency: $v_I(N) - n \leq \sum_{i \in N} \floorphi_i(v_I) \leq v_I(N)$,
+            \item Axiom of symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \floorphi_{i}(v_I) = \floorphi_{j}(v_I)$,
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \floorphi_{i}(v_I) = 0$,
+            \item Axiom of near additivity: $\floorphi(v_I+w_I) = \floor{\phi(v_I) + \phi(w_I)}$.
+        \end{enumerate}
+    \end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Efficient Floor Shapley value}
+    \pause
+    \begin{itemize}
+        \item The idea of preserving the efficiency...
+        \pause
+        \item Redistribution of the remaining value...
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Efficient Floor Shapley value}
+        For an integer cooperative game $G_I=(N,v_I) \in \mathcal{G}_I^n$, the \textbf{Efficient Floor Shapley value} $\phi^E(G_I)$ is defined as follows:
+        \begin{enumerate}
+            \item Compute the Floor Shapley value $\floorphi(G_I)$ and the Shapley value $\phi(G_I)$.
+            \item Compute the weights $w_i = \phi_i(G_I) - \floorphi_i(G_I)$ for all $i \in N$.
+            \item Sort the weights in descending order such that if multiple players have the same weight, then their ordering is uniformly random.
+            \item Each player receives his Floor Shapley value. Additionally, the top $k$ players, where $k = v_I(N) - \sum_{i \in N} \floorphi_i(v_I) = w(N)$, receive one extra unit.
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Efficient Floor Shapley value - properties}
+    \pause
+
+    \begin{block}{Theorem $17$}
+        The Efficient Floor Shapley value $\phi^E$ satisfies the following properties for all integer games $(N,v_I) \in \mathcal{G}_I^n$:
+        \begin{enumerate}
+            \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^E(v_I) = v_I(N)$,
+            \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi^E_{i}(v_I)] = \E[\phi^E_{j}(v_I)]$,
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^E(v_I) = 0$.
+        \end{enumerate}
+    \end{block}
+
+    \pause
+
+    \begin{itemize}
+        \item No axiom of additivity % TODO: v nekterych det a v sub random - example 
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Probabilistic Efficient Floor Shapley value}
+    \begin{itemize}
+        \item Same idea, different approach...
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Probabilistic Efficient Floor Shapley value}
+        For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \textbf{Probabilistic Efficient Floor Shapley value} $\phi^{\E}(v)$ is defined as follows:
+        \begin{enumerate}
+            \item Compute the Floor Shapley value $\floorphi(G_I)$ and the Shapley value $\phi(G_I)$.
+            \item Compute the remainders $\tilde{p}_i = \phi_i(G_I) - \floorphi_i(G_I)$ for all $i \in N$.
+            \item Compute the probabilities $p_i = \frac{\tilde{p}_i}{\sum_{j \in N} \tilde{p}_j}$ for all $i \in N$.
+            \item Each player receives his Floor Shapley value and additionally, each unit of the remainder with probability $p_i$, i.e., each unit of $\tilde{p}(N)=\sum_{j \in N} \tilde{p}_j$ is given to player $i$ with probability $p_i$.
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
+    \pause
+
+    \begin{block}{Theorem $18$}
+        The Probabilistic Efficient Floor Shapley value $\phi^{\E}$  satisfies the following properties for all integer games $(N,v_I),(N,w_I) \in \mathcal{G}_I^n$:
+        \begin{enumerate}
+            \item The expected value is the same as the Shapley value: $\E[\phi^{\E}(v_I)] = \phi(v_I)$,
+            \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^{\E}(v_I) = v_I(N)$,
+            \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi_{i}^{\E}(v_I)] = \E[\phi_{j}^{\E}(v_I)]$,
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^{\E}(v_I) = 0$,
+            \item Axiom of expected additivity: $\E[\phi^{\E}(v_I+w_I)] = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)]$.
+        \end{enumerate}
+    \end{block}
+
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley}
+    \pause
+    \begin{itemize}
+        \item Different approach using integer programming
+        \pause
+        \item Uses relation of the Shapley value and the Weber set
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Closest Lattice Shapley value}
+        Let $||\bullet||$ be a vector norm. The \textbf{Closest Lattice Shapley (CLS)} value of integer cooperative game $G_I \in \mathcal{G}_I^n$ is given by
+
+        \begin{displaymath}
+            \phi^\mathcal{W}(G_I)  = \min_{x \in \mathcal{W}_\Z(G_I)} ||\phi(G_I) - x||.
+        \end{displaymath}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley - properties}
+    \pause
+
+    \begin{itemize}
+        \item Does it even exist?
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Claim $19$}
+        The CLS value exists for all integer games $G_I \in \mathcal{G}_I^n$.
+    \end{block}
+
+    \pause
+
+    \begin{itemize}
+        \item What about the properties?
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Theorem $20$}
+        The CLS value $\phi^\mathcal{W}(v_I)$ satisfies the following properties for all integer games $(N,v_I) \in \mathcal{G}_I^n$:
+        
+        \begin{enumerate}
+            \item Axiom of efficiency: $\sum_{i \in N}(\phi^W)_{i}(v_I) = v_I(N)$,
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies (\phi^W)_{i}(v_I) = 0$.
+        \end{enumerate}
+    \end{block}
+
+    \pause
+
+    \begin{itemize}
+        \item No symmetry and additivity
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley - properties}
+    \pause
+
+    \begin{itemize}
+        \item What other properties...
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Claims $21$ - $24$}
+        For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
+        \begin{itemize}
+            \item is not unique in general,
+            \item is not always an extreme point of the Weber set $\mathcal{W}(G_I)$,
+            \item depends on the choice of the norm,
+            \item is different from the Efficient Floor Shapley value.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Integer nucleolus}
+    \pause
+
+    \begin{block}{Integer nucleolus}
+        For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \textbf{integer nucleolus} $\eta_\Z(G_I)$ is defined as
+        \begin{displaymath}
+            \eta_{\Z}(G_I) = \left\{ x \in \mathcal{I}_\Z(G_I) \mid \forall y \in \mathcal{I}_\Z(G_I): \Theta(x) \preceq_{lex} \Theta(y)\right\}.
+        \end{displaymath}
+    \end{block}
+
+    \pause
+
+    \begin{itemize}
+        \item When does it exist?
+    \end{itemize}
+
+    \pause
+
+    \begin{block}{Theorem $25$ - $26$}
+        For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
+
+        \begin{displaymath}
+            \mathcal{I}_{\Z}(G_I) \neq \emptyset \implies \eta_\Z(G_I) \neq \emptyset,
+        \end{displaymath}
+
+        additionally it holds that
+
+        \begin{displaymath}
+            \eta_\Z(G_I) \neq \emptyset \iff \eta(G_I) \neq \emptyset.
+        \end{displaymath}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Integer nucleolus - properties}
+    \pause
+
+    \textit{We lose the uniqueness...}
+
+    \pause
+    \begin{block}{Theorem $27$}
+        For an integer cooperative game $G_I \in \mathcal{G}_I^n$ the nucleolus is not necessarily a single point solution concept.
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Integer classes}
+    \pause
+    \begin{itemize}
+        \item Classes - games whose characteristic function satisfies certain properties
+        \pause
+        \item Introduced new integer based classes, for given $c$:
+        \begin{itemize}
+            \item $c$-tight - $\forall S \subseteq N: 0 \leq v(S) \leq c \land v(N) = c$
+            \item $c$-bounded - $\forall S \subseteq N: 0 \leq v(S) \leq c$
+        \end{itemize}
+        \pause
+        \item Experiments:
+        \begin{itemize}
+            \item Counted games from standard classes (e.g. convex games) that are also $c$-bounded/tight
+            \item Derived exact formulae for positive and $k$-games
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	 SECTION 4
+%----------------------------------------------------------------------------------------
+
+\section{Library}
+
+%------------------------------------------------
+
+\begin{frame}{Python library}
+    \pause
+    \begin{itemize}
+        \item \textbf{Shapleypy} - Python library for standard cooperative game theory
+        \pause
+        \item Available via PyPI or source code on GitHub
+        \pause
+        \item Currently offers:
+        \begin{itemize}
+            \item Solution concepts - Shapley and Banzhaf value, core
+            \item Classes - recognition of standard classes of games, generation of some classes
+            \item I/O - possibility to load and save games
+        \end{itemize}
+        \pause
+        \item Future plans:
+        \begin{itemize}
+            \item More solution concepts - nucleolus, kernel, etc.
+            \item More generators - might not be complete uniformly random
+            \item Better documentation
+            \item Include integer results
+        \end{itemize}
+    \end{itemize}
+    
+\end{frame}
+
+%------------------------------------------------
+
+\section{Thank you for your attention}
+
+\end{document}
