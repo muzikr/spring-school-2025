@@ -378,6 +378,108 @@
 
 %------------------------------------------------
 
+\begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
+    %TODO: split the slide (first up to colors, second finish)
+    \begin{block}{Theorem $18$}
+        \begin{enumerate}
+            \item The expected value is the same as the Shapley value: $\E[\phi^{\E}(v_I)] = \phi(v_I)$.
+        \end{enumerate}
+    \end{block}
+    Proof: After all the rounds the player gets
+    \begin{displaymath}
+        \E[\phi_{i}^{\E}(v_I)] = \floorphi_i(v_I) + \blue{\tilde{p}(N)} * \red{p_i} = \floorphi_i(v_I) + \green{\tilde{p}_i} = \phi_i(v_I).
+    \end{displaymath}
+    \begin{itemize}
+        \item $\blue{\tilde{p}(N) = \sum_{j \in N} \tilde{p}_j}$
+        \item $\red{p_i = \frac{\tilde{p}_i}{\sum_{j \in N} \tilde{p}_j}}$
+        \item $\green{\tilde{p}_i = \phi_i(G_I) - \floorphi_i(G_I)}$
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
+    \begin{block}{Theorem $18$}
+        \begin{enumerate}
+            \setcounter{enumi}{1}
+            \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^{\E}(v_I) = v_I(N)$.
+        \end{enumerate}
+    \end{block}
+    Proof: Directly from the definition as well as from the motivation.
+
+    \begin{block}{Theorem $18$}
+        \begin{enumerate}
+            \setcounter{enumi}{3}
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^{\E}(v_I) = 0$.
+        \end{enumerate}
+    \end{block}
+    Proof:
+    \begin{itemize}
+        \item Assume $i$ is null player.
+        \item Floor Shapley value $\floorphi_i(v_I) = 0$.
+        \item Additionally the probability that $i$ receive $1$ is $0$.
+    \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
+    \begin{block}{Theorem $18$}
+        \begin{enumerate}
+            \setcounter{enumi}{2}
+            \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi_{i}^{\E}(v_I)] = \E[\phi_{j}^{\E}(v_I)]$.
+        \end{enumerate}
+    \end{block}
+
+    Proof:
+
+    \begin{itemize}
+        \item Consider $i,j \in N: \phi_i(v_I) = \phi_j(v_I)$
+        \item $\implies \floorphi_i(V_I) = \floorphi_j(v_I)$
+        \item $\implies \tilde{p}_i = \tilde{p}_j$
+        \item Combine with $1.$ (i.e. $\E[\phi^{\E}(v_I)] = \phi(v_I)$)
+        \item We get
+        \begin{displaymath}
+            \E[\phi_{i}^{\E}(v_I)] = \phi_i(v_I) = \phi_j(v_I) = \E[\phi_{j}^{\E}(v_I)].
+        \end{displaymath}
+    \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
+    \begin{block}{Theorem $18$}
+        \begin{enumerate}
+            \setcounter{enumi}{4}
+            \item Axiom of expected additivity: $\E[\phi^{\E}(v_I+w_I)] = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)]$.
+        \end{enumerate}
+    \end{block}
+
+    Proof:
+
+    \begin{itemize}
+
+        \item Again use $1.$ (i.e. $\E[\phi^{\E}(v_I)] = \phi(v_I)$)
+        \item We get
+        \begin{displaymath}
+            \E[\phi^{\E}(v_I+w_I)] = \phi(v_I+w_I) = \phi(v_I) + \phi(w_I) = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)].
+        \end{displaymath}
+    \end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
 \begin{frame}{Closest lattice Shapley}
     %\pause
     \begin{itemize}
