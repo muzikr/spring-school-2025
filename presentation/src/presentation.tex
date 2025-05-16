@@ -771,6 +771,49 @@
 
 %------------------------------------------------
 
+\begin{frame}{Integer nucleolus}
+    \begin{block}{Theorem $25$ - $26$}
+        For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
+
+        \begin{displaymath}
+            \mathcal{I}_{\Z}(G_I) \neq \emptyset \implies \eta_\Z(G_I) \neq \emptyset.
+        \end{displaymath}
+    \end{block}
+    Proof:
+    \begin{itemize}
+        \item Lexicographical ordering on finite vectors $\implies$ vectors are comparable,
+        \item $\mathcal{I}_{\Z}(G_I)$ is finite $\implies$ in finite number of steps we reach the minimum.
+    \end{itemize}
+
+    \begin{block}{Corollary}
+        \begin{displaymath}
+            \mathcal{I}_{\Z}(G_I) \neq \emptyset \iff \eta_\Z(G_I) \neq \emptyset
+        \end{displaymath}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Integer nucleolus}
+    \begin{block}{Theorem $25$ - $26$}
+        For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
+
+        \begin{displaymath}
+            \eta_\Z(G_I) \neq \emptyset \iff \eta(G_I) \neq \emptyset.
+        \end{displaymath}
+    \end{block}
+    Proof:
+    \begin{displaymath}
+        \eta_\Z(G_I) \neq \emptyset \iff \mathcal{I}_{\Z}(G_I) \neq \emptyset \iff \mathcal{I}(G_I) \iff \eta(G_I) \neq \emptyset
+    \end{displaymath}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
 \begin{frame}{Integer nucleolus - properties}
     %\pause
 
@@ -780,67 +823,29 @@
     \begin{block}{Theorem $27$}
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$ the nucleolus is not necessarily a single point solution concept.
     \end{block}
+    Proof:
+
+\begin{table}[h]
+    \caption{Excesses of Example 1}
+    \label{fig:excesses_of_weber_set_example}
+    \centering
+    \begin{tabular}{|c||c|c||c|}
+        \hline
+        $x \in \mathcal{I}^{\Z}$ &  $e(\{1\}, x)$ & $e(\{2\},x)$ & $\Theta(x)$\\
+        \hline
+        \hline
+        $(1,4)$ & $0$ & $-3$ & $(0,-3)$ \\
+        $(2,3)$ & $-1$ & $-2$ & $(-1,-2)$ \\
+        $(3,2)$ & $-2$ & $-1$ & $(-1,-2)$ \\
+        $(4,1)$ & $-3$ & $0$ & $(0,-3)$ \\
+        \hline
+    \end{tabular}
+\end{table}
 \end{frame}
 
 %------------------------------------------------
 
-%------------------------------------------------
 
-\begin{frame}{Integer classes}
-    %\pause
-    \begin{itemize}
-        \item Classes - games whose characteristic function satisfies certain properties
-        %\pause
-        \item Introduced new integer based classes, for given $c$:
-        \begin{itemize}
-            \item $c$-tight - $\forall S \subseteq N: 0 \leq v(S) \leq c \land v(N) = c$
-            \item $c$-bounded - $\forall S \subseteq N: 0 \leq v(S) \leq c$
-        \end{itemize}
-        %\pause
-        \item Experiments:
-        \begin{itemize}
-            \item Counted games from standard classes (e.g. convex games) that are also $c$-bounded/tight
-            \item Derived exact formulae for positive and $k$-games
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-%------------------------------------------------
-
-%----------------------------------------------------------------------------------------
-%	 SECTION 4
-%----------------------------------------------------------------------------------------
-
-\section{Library}
-
-%------------------------------------------------
-
-\begin{frame}{Python library}
-    %\pause
-    \begin{itemize}
-        \item \textbf{Shapleypy} - Python library for standard cooperative game theory
-        %\pause
-        \item Available via PyPI or source code on GitHub
-        %\pause
-        \item Currently offers:
-        \begin{itemize}
-            \item Solution concepts - Shapley and Banzhaf value, core
-            \item Classes - recognition of standard classes of games, generation of some classes
-            \item I/O - possibility to load and save games
-        \end{itemize}
-        %\pause
-        \item Future plans:
-        \begin{itemize}
-            \item More solution concepts - nucleolus, kernel, etc.
-            \item More generators - might not be complete uniformly random
-            \item Better documentation
-            \item Include integer results
-        \end{itemize}
-    \end{itemize}
-    
-\end{frame}
-
-%------------------------------------------------
 
 \section{Thank you for your attention}
 
