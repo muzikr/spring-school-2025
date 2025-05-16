@@ -178,19 +178,19 @@
     \begin{block}{The Shapley value}
        The \textbf{Shapley value} $\phi(v)$ is the only function $f \colon \Gamma^n \to \mathbb{R}$ satisfying for all games $(N,v),(N,w)$:
         \begin{enumerate}
-            \item (AXIOM OF EFFICIENCE)
+            \item Axiom if efficiency:
             \begin{itemize}
                 \item $\sum_{i \in N}f_i(v) = v(N)$
             \end{itemize}
-            \item (AXIOM OF SYMMETRY)
+            \item Axiom of symmetry:
             \begin{itemize}
                 \item$\forall i,j \in N$ $(\forall S \subseteq N \setminus \{i,j\}: v(S \cup i) = v(S \cup j)) \implies f_i(v) = f_j(v)$
             \end{itemize}
-            \item (AXIOM OF NULL PLAYER)
+            \item Axiom of null player:
             \begin{itemize}
                 \item $\forall i \in N$ $(\forall S \subseteq N: v(S) = v(S \cup i)) \implies f_i(v)=0$
             \end{itemize}
-            \item (AXIOM OF ADDITIVITY)
+            \item Axiom of additivity:
             \begin{itemize}
                 \item $v,w \in \Gamma^n: f(v+w)=f(v)+f(w)$
             \end{itemize}
