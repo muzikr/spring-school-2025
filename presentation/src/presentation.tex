@@ -169,6 +169,70 @@
 
 %------------------------------------------------
 
+\begin{frame}{Cooperative game theory - solution concepts}
+    %\pause
+    \textit{It is possible to define it using its properties...}
+	%\pause
+    \begin{block}{The Shapley value}
+       The \textbf{Shapley value} $\phi(v)$ is the only function $f \colon \Gamma^n \to \mathbb{R}$ satisfying for all games $(N,v),(N,w)$:
+        \begin{enumerate}
+            \item (AXIOM OF EFFICIENCE)
+            \begin{itemize}
+                \item $\sum_{i \in N}f_i(v) = v(N)$
+            \end{itemize}
+            \item (AXIOM OF SYMMETRY)
+            \begin{itemize}
+                \item$\forall i,j \in N$ $(\forall S \subseteq N \setminus \{i,j\}: v(S \cup i) = v(S \cup j)) \implies f_i(v) = f_j(v)$
+            \end{itemize}
+            \item (AXIOM OF NULL PLAYER)
+            \begin{itemize}
+                \item $\forall i \in N$ $(\forall S \subseteq N: v(S) = v(S \cup i)) \implies f_i(v)=0$
+            \end{itemize}
+            \item (AXIOM OF ADDITIVITY)
+            \begin{itemize}
+                \item $v,w \in \Gamma^n: f(v+w)=f(v)+f(w)$
+            \end{itemize}
+        \end{enumerate}
+
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Cooperative game theory - solution concepts}
+    \begin{enumerate}
+		\item We fix one construction of $N$
+		\begin{itemize}
+			\item $\sigma \in \Sigma_n$ ... represent it by permutation
+			\item $\sigma(i)$ ... the order, in which player i enters the coalition
+		\end{itemize}
+		\item We compute player's payments
+		\begin{itemize}
+			\item $m^\sigma_v$ ... \textbf{marginal vector}
+			\item $\left(m^\sigma_v\right)_i=v\left(S_{\sigma(i)}\cup i\right)-v\left(S_{\sigma(i)}\right)$
+			\begin{itemize}
+				\item $S_{\sigma(i)}= \left\{j \in N \mid \sigma(j) < \sigma(i)\right\}$ ... predecessors of $i$ under $\sigma$
+			\end{itemize}
+		\end{itemize}
+		\item We consider all combinations
+		\begin{itemize}
+			\item $\mathcal{W}(v)=conv\left\{m^{\sigma}_{v}\mid \sigma \in \Sigma_n\right\}$ ... \textbf{Webber set}
+		\end{itemize}
+	\end{enumerate}
+	\begin{itemize}
+		\item It holds: $\phi(v)=\sum_{\sigma \in \Sigma_n} \frac{m^\sigma_v}{n!}$
+	\end{itemize}
+	\begin{block}{Relation between the Shapley value and the Webber set}
+		For a cooperative game $(N,v)$ it holds:
+		\[\phi(v) \in \mathcal{W}(v)\]
+		Moreover, $\phi(v)$ is the center of gravity of $\mathcal{W}(v)$.
+	\end{block}
+\end{frame}
+
+%------------------------------------------------
+
 %------------------------------------------------
 
 \begin{frame}{Cooperative game theory - solution concepts}
@@ -243,13 +307,13 @@
         \begin{itemize}
             \item \emph{Integer core}: $\mathcal{C}_{\Z}(G_I) = \mathcal{C}(G_I) \cap \Z^{n}$,
             \item \emph{Integer D-Core}: $DC_{\Z}(G_I) = \mathcal{I}_{\Z}(G_I) \setminus dom(\mathcal{I}_{\Z}(G_I))$,
+            \item \emph{Integer Weber set}: $\mathcal{W}_{\Z}(G_I) = \mathcal{W}(G_I) \cap \Z^{n}$,
             \item \dots
         \end{itemize}
     \end{block}
 
     %\pause
 
-    \textit{These solution concepts were already studied in the past...}
 \end{frame}
 
 %------------------------------------------------
@@ -448,7 +512,6 @@
             \E[\phi_{i}^{\E}(v_I)] = \phi_i(v_I) = \phi_j(v_I) = \E[\phi_{j}^{\E}(v_I)].
         \end{displaymath}
     \end{itemize}
-
 \end{frame}
 
 %------------------------------------------------
