@@ -579,7 +579,21 @@
         The CLS value exists for all integer games $G_I \in \mathcal{G}_I^n$.
     \end{block}
 
-    %\pause
+    Proof:
+    \begin{itemize}
+        \item Real question: \textit{Is integer Weber always set non-empty?}
+        \item $\left(m^\sigma_{v_I}\right)_i=v\left(S_{\sigma(i)}\cup i\right)-v\left(S_{\sigma(i)}\right) \in \Z$,
+        \item $\mathcal{W}(v_I)=conv\left\{m^{\sigma}_{v_I}\mid \sigma \in \Sigma_n\right\}$,
+        \item $\mathcal{W}_{\Z}(G_I) = \mathcal{W}(G_I) \cap \Z^{n}$,
+        \item $\implies$ at least the points from which we do convex hull.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley - properties}
 
     \begin{itemize}
         \item What about the properties?
@@ -621,10 +635,99 @@
         \begin{itemize}
             \item is not unique in general,
             \item is not always an extreme point of the Weber set $\mathcal{W}(G_I)$,
-            \item depends on the choice of the norm,
-            \item is different from the Efficient Floor Shapley value.
+            \item depends on the choice of the norm.
         \end{itemize}
     \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley - properties}
+
+    \begin{block}{$G_I^{\star}=(N,v_I)$}
+        \begin{itemize}
+            \item $N=\{1,2\}$,
+            \item $v_I(\{1\})=v_I(\{2\})=1$, $v_I(N)=5$,
+            \item $\phi(v_I)=(2.5,2.5)$.
+        \end{itemize}
+    \end{block}
+
+    \centering
+    \includegraphics[height=5cm]{../img/figure_weber_set_example.png}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley - properties}
+
+    \begin{block}{Claims $21$ - $24$}
+        For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
+        \begin{itemize}
+            \item is not unique in general,
+            \item is not always an extreme point of the Weber set $\mathcal{W}(G_I)$.
+        \end{itemize}
+    \end{block}
+
+    \centering
+    \includegraphics[height=5cm]{../img/figure_weber_set_example.png}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley - properties}
+
+    \begin{block}{Claims $21$ - $24$}
+        For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
+        \begin{itemize}
+            \item depends on the choice of the norm.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{$G_I^{\star}=(N,w_I)$}
+        \begin{itemize}
+            \item $N=\{1,2,3\}$,
+            \item $w_I(\{1\})=w_I(\{1,2\})=w_I(\{1,3\})=1$,
+            \item $w_I(\{2\})=w_I(\{3\})=w_I(\{2,3\})=0$,
+            \item $w_I(N)=2$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+
+\begin{frame}{Closest lattice Shapley - properties}
+
+    \begin{block}{Claims $21$ - $24$}
+        For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
+        \begin{itemize}
+            \item depends on the choice of the norm.
+        \end{itemize}
+    \end{block}
+
+    \begin{itemize}
+        \item $\phi(w_i) = (\frac{4}{3},\frac{1}{3},\frac{1}{3})$,
+        \item $||x||_A=\sqrt{x^T A x}\implies \phi^\mathcal{W}_A(w_I) = (2,0,0)$
+        \begin{itemize}
+            \item $A = \begin{pmatrix}
+            2 & 0 & 0 \\
+            0 & 3 & 0 \\
+            0 & 0 & 4
+        \end{pmatrix}$
+        \item Distance (in $A$-norm): $1.29099$
+        \end{itemize}
+        \item $\ell_1$-norm$\implies \phi^\mathcal{W}_{\ell_1}(w_I) = (1,1,0)$
+        \begin{itemize}
+            \item Distance (in $A$-norm): $1.41421$
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
 %------------------------------------------------
