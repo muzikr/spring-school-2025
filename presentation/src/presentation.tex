@@ -100,34 +100,38 @@
 %------------------------------------------------
 
 \begin{frame}{Cooperative game theory}
-    %\pause
+    \pause
 
     \begin{block}{Cooperative game}
+        \pause
         A \textbf{cooperative game} is an ordered pair $(N,v)$, where $N=\{1,\dots,n\}$ is a finite set of players and $v\colon 2^N \to \mathbb{R}$ is the characteristic function.
         Further, $v(\emptyset) = 0$.
     \end{block}
 
+    \pause
     \begin{itemize}
         \item $S \subseteq N$ ... coalition
+        \pause
         \item $v(S)$ ... values of coalition
     \end{itemize}
 
-    %\pause
+    \pause
 
     Goal: \textit{To distribute the value of the game among players}
 
-    %\pause
+    \pause
 
     \begin{itemize}
 	    \item \textbf{Payoff vector} $\bx \in \Rn$
 	    \begin{itemize}
 	        \item $x_i$ represents payoff of player $i$
 	    \end{itemize}
-        %\pause
+        \pause
 	    \item Vector $\bx \in \Rn$ is \textbf{efficient}, if $\sum_{i \in N}x_i = v(N)$
 	    \begin{itemize}
 	        \item Usually, we distribute $v(N)$
 	    \end{itemize}
+        \pause
 	    \item Vector $\bx \in \Rn$ is \textbf{individually rational}, if $x_i \geq v(i)$
 	    \begin{itemize}
 	        \item players prefer $x_i$ over $v(i)$
@@ -140,27 +144,30 @@
 %------------------------------------------------
 
 \begin{frame}{Cooperative game theory - solution concepts}
-    %\pause
+    \pause
 
     \textit{But firstly...}
 
-    %\pause
+    \pause
 
     \begin{block}{Imputation set}
         For cooperative game $(N,v)$, we define the following sets:
         \begin{itemize}
+            \pause
             \item \textbf{Preimputation}: $\I^*(v) = \left\{x \in \Rn \mid x(N) = v(N) \right\}$
+            \pause
             \item \textbf{Imputation}: $\I(v) = \left\{x \in \I^*(v) \mid \forall i \in N: x_i \geq v(i)\right\}$
         \end{itemize} 
     \end{block}
 
-    %\pause
+    \pause
 
     \textit{Possible fair solution...}
 
-    %\pause
+    \pause
 
     \begin{block}{The Shapley value}
+        \pause
         For a cooperative game $(N,v)$, the \textbf{Shapley value} $\phi(v)$ of player $i$ is
         \begin{displaymath}
             \phi_i(v) = \sum_{S \subseteq N \setminus i}\frac{s!(n-s-1)!}{n!}\left(v(S \cup i) - v(S)\right)    
@@ -172,24 +179,28 @@
 %------------------------------------------------
 
 \begin{frame}{Shapley value - properties}
-    %\pause
+    \pause
     \textit{It is possible to define it using its properties...}
-	%\pause
+	\pause
     \begin{block}{The Shapley value}
        The \textbf{Shapley value} $\phi(v)$ is the only function $f \colon \Gamma^n \to \mathbb{R}$ satisfying for all games $(N,v),(N,w)$:
         \begin{enumerate}
+            \pause
             \item Axiom if efficiency:
             \begin{itemize}
                 \item $\sum_{i \in N}f_i(v) = v(N)$
             \end{itemize}
+            \pause
             \item Axiom of symmetry:
             \begin{itemize}
                 \item$\forall i,j \in N$ $(\forall S \subseteq N \setminus \{i,j\}: v(S \cup i) = v(S \cup j)) \implies f_i(v) = f_j(v)$
             \end{itemize}
+            \pause
             \item Axiom of null player:
             \begin{itemize}
                 \item $\forall i \in N$ $(\forall S \subseteq N: v(S) = v(S \cup i)) \implies f_i(v)=0$
             \end{itemize}
+            \pause
             \item Axiom of additivity:
             \begin{itemize}
                 \item $v,w \in \Gamma^n: f(v+w)=f(v)+f(w)$
@@ -204,12 +215,14 @@
 %------------------------------------------------
 
 \begin{frame}{Generalization of the Shapley value}
+    \pause
     \begin{enumerate}
 		\item We fix one construction of $N$
 		\begin{itemize}
 			\item $\sigma \in \Sigma_n$ ... represent it by permutation
 			\item $\sigma(i)$ ... the order, in which player i enters the coalition
 		\end{itemize}
+        \pause
 		\item We compute player's payments
 		\begin{itemize}
 			\item $m^\sigma_v$ ... \textbf{marginal vector}
@@ -218,15 +231,19 @@
 				\item $S_{\sigma(i)}= \left\{j \in N \mid \sigma(j) < \sigma(i)\right\}$ ... predecessors of $i$ under $\sigma$
 			\end{itemize}
 		\end{itemize}
+        \pause
 		\item We consider all combinations
 		\begin{itemize}
 			\item $\mathcal{W}(v)=conv\left\{m^{\sigma}_{v}\mid \sigma \in \Sigma_n\right\}$ ... \textbf{Weber set}
 		\end{itemize}
 	\end{enumerate}
+    \pause
 	\begin{itemize}
 		\item Weber set is multipoint generalization
 	\end{itemize}
+    \pause
 	\begin{block}{Relation between the Shapley value and the Weber set}
+        \pause
 		For a cooperative game $(N,v)$ it holds:
 		\[\phi(v) \in \mathcal{W}(v)\]
 		Moreover, $\phi(v)$ is the center of gravity of $\mathcal{W}(v)$.
@@ -238,19 +255,21 @@
 %------------------------------------------------
 
 \begin{frame}{Nucleolus}
-    %\pause
+    \pause
 
     \begin{itemize}
         \item $e(S,x,v) = v(S) - x(S)$ ... excess of coalition $S$ with respect to payoff vector $x$
+        \pause
         \item $\Theta(x)=\left(e(S_1,x,v), \dots, e(S_{2^{n}-2},x,v)\right)$ ... vector of excesses
         \begin{itemize}
             \item Excesses ordered in decreasing order
         \end{itemize}
     \end{itemize}
 
-    %\pause
+    \pause
 
     \begin{block}{Nucleolus}
+        \pause
         For a cooperative game $(N,v)$, the \emph{nucleolus} $\eta(v)$ is defined as
         \begin{displaymath}
             \eta(v) = \left\{ x \in \mathcal{I}(v) \mid \forall y \in \mathcal{I}(v): \Theta(x) \preceq_{lex} \Theta(y)\right\},
@@ -264,25 +283,30 @@
 %------------------------------------------------
 
 \begin{frame}{Cooperative game theory - integer setting}
-    %\pause
+    \pause
 
     \textit{The goal of integer cooperative game theory is to study and find integer solution concepts...}
 
-    %\pause
+    \pause
 
     \begin{block}{Integer cooperative game}
+        \pause
         The \textbf{integer cooperative game} is a pair $(N, v_I)$, where $N$ is a finite set of players and $v_I: 2^N \to \Z$ is a characteristic function.
         Furthermore, $v_I(\emptyset) = 0$.
     \end{block}
 
-    %\pause
+    \pause
 
     \begin{itemize}
         \item Does not ensure the integrality of the solution concepts
+        \pause
         \item Introduce new solution concepts based on the already known ones, ensuring integrality
+        \pause
         \item Notion:
+        \pause
         \begin{itemize}
             \item $G_I$ ... integer cooperative game
+            \pause
             \item $\mathcal{G}_I^n$ ... set of all integer cooperative games with $n$ players
         \end{itemize}
     \end{itemize}
@@ -294,22 +318,27 @@
 %------------------------------------------------
 
 \begin{frame}{Integer solution concepts}
-    %\pause
+    \pause
 
     \textit{Multi point sets...}
 
-    %\pause
+    \pause
 
     \begin{block}{Solution concepts}
+        \pause
         For integer cooperative game $G_I \in \mathcal{G}_I^n$, we define:
         \begin{itemize}
+            \pause
             \item \emph{Integer imputation set}: $\mathcal{I}_{\Z}(G_I) = \mathcal{I}(G_I) \cap \Z^{n}$
+            \pause
             \item \emph{Integer Weber set}: $\mathcal{W}_{\Z}(G_I) = \mathcal{W}(G_I) \cap \Z^{n}$
         \end{itemize}
     \end{block}
 
+    \pause
     \begin{itemize}
         \item More define in similar way and were studied before
+        \pause
         \item Last year spring school talk
     \end{itemize}
 
@@ -327,20 +356,26 @@
 %------------------------------------------------
 
 \begin{frame}{Floor Shapley value}
-    %\pause
+    \pause
 
     \begin{block}{Floor Shapley value}
+        \pause
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \textbf{Floor Shapley value} $\floorphi(G_I)$ is given by $\floorphi(G_I) = \floor{\phi(G_I)}$.
     \end{block}
 
-    %\pause
+    \pause
 
     \begin{block}{Theorem $16$}
+        \pause
         The Floor Shapley value $\floorphi(v_I)$ satisfies the following properties for all integer games $(N,v_I),(N,w_I) \in \mathcal{G}_I^n$:
         \begin{enumerate}
+            \pause
             \item Axiom of near efficiency: $v_I(N) - n \leq \sum_{i \in N} \floorphi_i(v_I) \leq v_I(N)$,
+            \pause
             \item Axiom of symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \floorphi_{i}(v_I) = \floorphi_{j}(v_I)$,
+            \pause
             \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \floorphi_{i}(v_I) = 0$,
+            \pause
             \item Axiom of near additivity: $\floorphi(v_I+w_I) = \floor{\phi(v_I) + \phi(w_I)}$.
         \end{enumerate}
     \end{block}
@@ -352,21 +387,25 @@
 %------------------------------------------------
 
 \begin{frame}{Efficient Floor Shapley value}
-    %\pause
-    \begin{itemize}
-        \item The idea of preserving the efficiency...
-        %\pause
-        \item Redistribution of the remaining value...
-    \end{itemize}
+    \pause
+    \textit{The idea of preserving the efficiency...}
 
-    %\pause
+    \pause
+    \textit{Redistribution of the remaining value...}
+
+    \pause
 
     \begin{block}{Efficient Floor Shapley value}
+        \pause
         For an integer cooperative game $G_I=(N,v_I) \in \mathcal{G}_I^n$, the \textbf{Efficient Floor Shapley value} $\phi^E(G_I)$ is defined as follows:
         \begin{enumerate}
+            \pause
             \item Compute the Floor Shapley value $\floorphi(G_I)$ and the Shapley value $\phi(G_I)$.
+            \pause
             \item Compute the weights $w_i = \phi_i(G_I) - \floorphi_i(G_I)$ for all $i \in N$.
+            \pause
             \item Sort the weights in descending order such that if multiple players have the same weight, then their ordering is uniformly random.
+            \pause
             \item Each player receives his Floor Shapley value. Additionally, the top $k$ players, where $k = v_I(N) - \sum_{i \in N} \floorphi_i(v_I) = w(N)$, receive one extra unit.
         \end{enumerate}
     \end{block}
@@ -377,18 +416,22 @@
 %------------------------------------------------
 
 \begin{frame}{Efficient Floor Shapley value - properties}
-    %\pause
+    \pause
 
     \begin{block}{Theorem $17$}
+        \pause
         The Efficient Floor Shapley value $\phi^E$ satisfies the following properties for all integer games $(N,v_I) \in \mathcal{G}_I^n$:
         \begin{enumerate}
+            \pause
             \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^E(v_I) = v_I(N)$,
+            \pause
             \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi^E_{i}(v_I)] = \E[\phi^E_{j}(v_I)]$,
+            \pause
             \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^E(v_I) = 0$.
         \end{enumerate}
     \end{block}
 
-    %\pause
+    \pause
 
     \begin{itemize}
         \item No axiom of additivity % TODO: v nekterych det a v sub random - example 
@@ -400,18 +443,23 @@
 %------------------------------------------------
 
 \begin{frame}{Probabilistic Efficient Floor Shapley value}
-    \begin{itemize}
-        \item Same idea, different approach...
-    \end{itemize}
+    \pause
+    
+    \textit{Same idea, different approach...}
 
-    %\pause
+    \pause
 
     \begin{block}{Probabilistic Efficient Floor Shapley value}
+        \pause
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \textbf{Probabilistic Efficient Floor Shapley value} $\phi^{\E}(v)$ is defined as follows:
         \begin{enumerate}
+            \pause
             \item Compute the Floor Shapley value $\floorphi(G_I)$ and the Shapley value $\phi(G_I)$.
+            \pause
             \item Compute the remainders $\tilde{p}_i = \phi_i(G_I) - \floorphi_i(G_I)$ for all $i \in N$.
+            \pause
             \item Compute the probabilities $p_i = \frac{\tilde{p}_i}{\sum_{j \in N} \tilde{p}_j}$ for all $i \in N$.
+            \pause
             \item Each player receives his Floor Shapley value and additionally, each unit of the remainder with probability $p_i$, i.e., each unit of $\tilde{p}(N)=\sum_{j \in N} \tilde{p}_j$ is given to player $i$ with probability $p_i$.
         \end{enumerate}
     \end{block}
@@ -422,16 +470,22 @@
 %------------------------------------------------
 
 \begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
-    %\pause
+    \pause
 
-    \begin{block}{Theorem $18$}
+    \begin{block}{PEFSV - properties}
+        \pause
         The Probabilistic Efficient Floor Shapley value $\phi^{\E}$  satisfies the following properties for all integer games $(N,v_I),(N,w_I) \in \mathcal{G}_I^n$:
         \begin{enumerate}
-            \item The expected value is the same as the Shapley value: $\E[\phi^{\E}(v_I)] = \phi(v_I)$,
-            \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^{\E}(v_I) = v_I(N)$,
-            \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi_{i}^{\E}(v_I)] = \E[\phi_{j}^{\E}(v_I)]$,
-            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^{\E}(v_I) = 0$,
-            \item Axiom of expected additivity: $\E[\phi^{\E}(v_I+w_I)] = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)]$.
+            \pause
+            \item The expected value is the same as the Shapley value: $\E[\phi^{\E}(v_I)] = \phi(v_I)$
+            \pause
+            \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^{\E}(v_I) = v_I(N)$
+            \pause
+            \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi_{i}^{\E}(v_I)] = \E[\phi_{j}^{\E}(v_I)]$
+            \pause
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^{\E}(v_I) = 0$
+            \pause
+            \item Axiom of expected additivity: $\E[\phi^{\E}(v_I+w_I)] = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)]$
         \end{enumerate}
     \end{block}
 
@@ -443,18 +497,24 @@
 
 \begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
     %TODO: split the slide (first up to colors, second finish)
-    \begin{block}{Theorem $18$}
+    \pause
+    \begin{block}{PEFSV - properties}
         \begin{enumerate}
-            \item The expected value is the same as the Shapley value: $\E[\phi^{\E}(v_I)] = \phi(v_I)$.
+            \item The expected value is the same as the Shapley value: $\E[\phi^{\E}(v_I)] = \phi(v_I)$
         \end{enumerate}
     \end{block}
+    \pause
     Proof: After all the rounds the player gets
+    \pause
     \begin{displaymath}
-        \E[\phi_{i}^{\E}(v_I)] = \floorphi_i(v_I) + \blue{\tilde{p}(N)} * \red{p_i} = \floorphi_i(v_I) + \green{\tilde{p}_i} = \phi_i(v_I).
+        \E[\phi_{i}^{\E}(v_I)] = \floorphi_i(v_I) + \blue{\tilde{p}(N)} * \red{p_i} = \floorphi_i(v_I) + \green{\tilde{p}_i} = \phi_i(v_I)
     \end{displaymath}
     \begin{itemize}
+        \pause
         \item $\blue{\tilde{p}(N) = \sum_{j \in N} \tilde{p}_j}$
+        \pause
         \item $\red{p_i = \frac{\tilde{p}_i}{\sum_{j \in N} \tilde{p}_j}}$
+        \pause
         \item $\green{\tilde{p}_i = \phi_i(G_I) - \floorphi_i(G_I)}$
     \end{itemize}
 \end{frame}
@@ -464,25 +524,33 @@
 %------------------------------------------------
 
 \begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
-    \begin{block}{Theorem $18$}
+    \pause
+    \begin{block}{PEFSV - properties}
         \begin{enumerate}
             \setcounter{enumi}{1}
-            \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^{\E}(v_I) = v_I(N)$.
+            \item Axiom of efficiency: $\sum_{i \in N}\phi_{i}^{\E}(v_I) = v_I(N)$
         \end{enumerate}
     \end{block}
+    \pause
     Proof: Directly from the definition as well as from the motivation.
 
-    \begin{block}{Theorem $18$}
+    \pause
+    \begin{block}{PEFSV - properties}
         \begin{enumerate}
             \setcounter{enumi}{3}
-            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^{\E}(v_I) = 0$.
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies \phi_{i}^{\E}(v_I) = 0$
         \end{enumerate}
     \end{block}
+
+    \pause
     Proof:
     \begin{itemize}
-        \item Assume $i$ is null player.
-        \item Floor Shapley value $\floorphi_i(v_I) = 0$.
-        \item Additionally the probability that $i$ receive $1$ is $0$.
+        \pause
+        \item Assume $i$ is null player
+        \pause
+        \item Floor Shapley value $\floorphi_i(v_I) = 0$
+        \pause
+        \item Additionally the probability that $i$ receive $1$ is $0$
     \end{itemize}
 
 \end{frame}
@@ -492,23 +560,30 @@
 %------------------------------------------------
 
 \begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
-    \begin{block}{Theorem $18$}
+    \pause
+    \begin{block}{PEFSV - properties}
         \begin{enumerate}
             \setcounter{enumi}{2}
-            \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi_{i}^{\E}(v_I)] = \E[\phi_{j}^{\E}(v_I)]$.
+            \item Axiom of expected symmetry: $\forall i,j \in N (\forall S \subseteq N \setminus \{i,j\}: v_I(S \cup i) = v_I(S \cup j)) \Rightarrow \E[\phi_{i}^{\E}(v_I)] = \E[\phi_{j}^{\E}(v_I)]$
         \end{enumerate}
     \end{block}
 
+    \pause
     Proof:
 
     \begin{itemize}
+        \pause
         \item Consider $i,j \in N: \phi_i(v_I) = \phi_j(v_I)$
+        \pause
         \item $\implies \floorphi_i(V_I) = \floorphi_j(v_I)$
+        \pause
         \item $\implies \tilde{p}_i = \tilde{p}_j$
+        \pause
         \item Combine with $1.$ (i.e. $\E[\phi^{\E}(v_I)] = \phi(v_I)$)
+        \pause
         \item We get
         \begin{displaymath}
-            \E[\phi_{i}^{\E}(v_I)] = \phi_i(v_I) = \phi_j(v_I) = \E[\phi_{j}^{\E}(v_I)].
+            \E[\phi_{i}^{\E}(v_I)] = \phi_i(v_I) = \phi_j(v_I) = \E[\phi_{j}^{\E}(v_I)]
         \end{displaymath}
     \end{itemize}
 \end{frame}
@@ -518,21 +593,25 @@
 %------------------------------------------------
 
 \begin{frame}{Probabilistic Efficient Floor Shapley value - properties}
-    \begin{block}{Theorem $18$}
+    \pause
+    \begin{block}{PEFSV - properties}
         \begin{enumerate}
             \setcounter{enumi}{4}
-            \item Axiom of expected additivity: $\E[\phi^{\E}(v_I+w_I)] = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)]$.
+            \item Axiom of expected additivity: $\E[\phi^{\E}(v_I+w_I)] = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)]$
         \end{enumerate}
     \end{block}
+
+    \pause
 
     Proof:
 
     \begin{itemize}
-
+        \pause
         \item Again use $1.$ (i.e. $\E[\phi^{\E}(v_I)] = \phi(v_I)$)
+        \pause
         \item We get
         \begin{displaymath}
-            \E[\phi^{\E}(v_I+w_I)] = \phi(v_I+w_I) = \phi(v_I) + \phi(w_I) = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)].
+            \E[\phi^{\E}(v_I+w_I)] = \phi(v_I+w_I) = \phi(v_I) + \phi(w_I) = \E[\phi^{\E}(v_I)] + \E[\phi^{\E}(w_I)]
         \end{displaymath}
     \end{itemize}
 
@@ -543,17 +622,19 @@
 %------------------------------------------------
 
 \begin{frame}{Closest lattice Shapley}
-    %\pause
+    \pause
     \begin{itemize}
         \item Different approach using integer programming
-        %\pause
+        \pause
         \item Uses relation of the Shapley value and the Weber set
     \end{itemize}
 
-    %\pause
+    \pause
 
     \begin{block}{Closest Lattice Shapley value}
-        Let $||\bullet||$ be a vector norm. The \textbf{Closest Lattice Shapley (CLS)} value of integer cooperative game $G_I \in \mathcal{G}_I^n$ is given by
+        \pause
+        Let $||\bullet||$ be a vector norm. 
+        The \textbf{Closest Lattice Shapley (CLS)} value of integer cooperative game $G_I \in \mathcal{G}_I^n$ is given by
 
         \begin{displaymath}
             \phi^\mathcal{W}(G_I)  = \min_{x \in \mathcal{W}_\Z(G_I)} ||\phi(G_I) - x||.
@@ -566,25 +647,32 @@
 %------------------------------------------------
 
 \begin{frame}{Closest lattice Shapley - properties}
-    %\pause
+    \pause
 
-    \begin{itemize}
-        \item Does it even exist?
-    \end{itemize}
+    \textit{Does it even exist?}
 
-    %\pause
+    \pause
 
-    \begin{block}{Claim $19$}
+    \begin{block}{CLS - existence}
+        \pause
         The CLS value exists for all integer games $G_I \in \mathcal{G}_I^n$.
     \end{block}
 
+    \pause
+
     Proof:
+
     \begin{itemize}
+        \pause
         \item Real question: \textit{Is integer Weber always set non-empty?}
-        \item $\left(m^\sigma_{v_I}\right)_i=v\left(S_{\sigma(i)}\cup i\right)-v\left(S_{\sigma(i)}\right) \in \Z$,
-        \item $\mathcal{W}(v_I)=conv\left\{m^{\sigma}_{v_I}\mid \sigma \in \Sigma_n\right\}$,
-        \item $\mathcal{W}_{\Z}(G_I) = \mathcal{W}(G_I) \cap \Z^{n}$,
-        \item $\implies$ at least the points from which we do convex hull.
+        \pause
+        \item $\left(m^\sigma_{v_I}\right)_i=v\left(S_{\sigma(i)}\cup i\right)-v\left(S_{\sigma(i)}\right) \in \Z$
+        \pause
+        \item $\mathcal{W}(v_I)=conv\left\{m^{\sigma}_{v_I}\mid \sigma \in \Sigma_n\right\}$
+        \pause
+        \item $\mathcal{W}_{\Z}(G_I) = \mathcal{W}(G_I) \cap \Z^{n}$
+        \pause
+        \item $\implies$ at least the points from which we do convex hull
     \end{itemize}
 \end{frame}
 
@@ -594,22 +682,24 @@
 
 \begin{frame}{Closest lattice Shapley - properties}
 
-    \begin{itemize}
-        \item What about the properties?
-    \end{itemize}
+    \pause
+    \textit{What about the properties?}
 
-    %\pause
+    \pause
 
-    \begin{block}{Theorem $20$}
+    \begin{block}{CLS - properties}
+        \pause
         The CLS value $\phi^\mathcal{W}(v_I)$ satisfies the following properties for all integer games $(N,v_I) \in \mathcal{G}_I^n$:
         
         \begin{enumerate}
-            \item Axiom of efficiency: $\sum_{i \in N}(\phi^W)_{i}(v_I) = v_I(N)$,
-            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies (\phi^W)_{i}(v_I) = 0$.
+            \pause
+            \item Axiom of efficiency: $\sum_{i \in N}(\phi^W)_{i}(v_I) = v_I(N)$
+            \pause
+            \item Axiom of null player: $\forall i \in N(\forall S \subseteq N: v_I(S)=v_I(S \cup i)) \implies (\phi^W)_{i}(v_I) = 0$
         \end{enumerate}
     \end{block}
 
-    %\pause
+    \pause
 
     \begin{itemize}
         \item No symmetry and additivity
@@ -621,20 +711,22 @@
 %------------------------------------------------
 
 \begin{frame}{Closest lattice Shapley - properties}
-    %\pause
+    \pause
 
-    \begin{itemize}
-        \item What other properties...
-    \end{itemize}
+    \textit{What other properties...}
 
-    %\pause
+    \pause
 
-    \begin{block}{Claims $21$ - $24$}
+    \begin{block}{CLS - properties}
+        \pause
         For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
         \begin{itemize}
-            \item is not unique in general,
-            \item is not always an extreme point of the Weber set $\mathcal{W}(G_I)$,
-            \item depends on the choice of the norm.
+            \pause
+            \item is not unique in general
+            \pause
+            \item is not always an extreme point of the Weber set $\mathcal{W}(G_I)$
+            \pause
+            \item depends on the choice of the norm
         \end{itemize}
     \end{block}
 \end{frame}
@@ -643,15 +735,20 @@
 
 %------------------------------------------------
 
-\begin{frame}{Closest lattice Shapley - properties}
+\begin{frame}{Example for proofs}
 
     \begin{block}{$G_I^{\star}=(N,v_I)$}
+        \pause
         \begin{itemize}
-            \item $N=\{1,2\}$,
-            \item $v_I(\{1\})=v_I(\{2\})=1$, $v_I(N)=5$,
-            \item $\phi(v_I)=(2.5,2.5)$.
+            \item $N=\{1,2\}$
+            \pause
+            \item $v_I(\{1\})=v_I(\{2\})=1$, $v_I(N)=5$
+            \pause
+            \item $\phi(v_I)=(2.5,2.5)$
         \end{itemize}
     \end{block}
+
+    \pause
 
     \centering
     \includegraphics[height=5cm]{../img/figure_weber_set_example.png}
@@ -662,14 +759,17 @@
 %------------------------------------------------
 
 \begin{frame}{Closest lattice Shapley - properties}
+    \pause
 
-    \begin{block}{Claims $21$ - $24$}
+    \begin{block}{CLS - properties}
         For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
         \begin{itemize}
-            \item is not unique in general,
-            \item is not always an extreme point of the Weber set $\mathcal{W}(G_I)$.
+            \item is not unique in general
+            \item is not always an extreme point of the Weber set $\mathcal{W}(G_I)$
         \end{itemize}
     \end{block}
+
+    \pause
 
     \centering
     \includegraphics[height=5cm]{../img/figure_weber_set_example.png}
@@ -680,19 +780,30 @@
 %------------------------------------------------
 
 \begin{frame}{Closest lattice Shapley - properties}
+    \pause
 
-    \begin{block}{Claims $21$ - $24$}
+    \begin{block}{CLS- properties}
         For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
         \begin{itemize}
-            \item depends on the choice of the norm.
+            \item depends on the choice of the norm
         \end{itemize}
     \end{block}
+
+    \pause
+
+    \textit{Another example...}
+
+    \pause
 
     \begin{block}{$G_I^{\star}=(N,w_I)$}
         \begin{itemize}
-            \item $N=\{1,2,3\}$,
-            \item $w_I(\{1\})=w_I(\{1,2\})=w_I(\{1,3\})=1$,
-            \item $w_I(\{2\})=w_I(\{3\})=w_I(\{2,3\})=0$,
+            \pause
+            \item $N=\{1,2,3\}$
+            \pause
+            \item $w_I(\{1\})=w_I(\{1,2\})=w_I(\{1,3\})=1$
+            \pause
+            \item $w_I(\{2\})=w_I(\{3\})=w_I(\{2,3\})=0$
+            \pause
             \item $w_I(N)=2$
         \end{itemize}
     \end{block}
@@ -703,27 +814,35 @@
 %------------------------------------------------
 
 \begin{frame}{Closest lattice Shapley - properties}
+    \pause
 
-    \begin{block}{Claims $21$ - $24$}
+    \begin{block}{CLS - properties}
         For integer game $G_I \in \mathcal{G}_I^n$, the CLS value $\phi^\mathcal{W}(G_I)$:
         \begin{itemize}
-            \item depends on the choice of the norm.
+            \item depends on the choice of the norm
         \end{itemize}
     \end{block}
 
+    \pause
+
     \begin{itemize}
-        \item $\phi(w_i) = (\frac{4}{3},\frac{1}{3},\frac{1}{3})$,
+        \item $\phi(w_i) = (\frac{4}{3},\frac{1}{3},\frac{1}{3})$
+        \pause
         \item $||x||_A=\sqrt{x^T A x}\implies \phi^\mathcal{W}_A(w_I) = (2,0,0)$
         \begin{itemize}
+            \pause
             \item $A = \begin{pmatrix}
             2 & 0 & 0 \\
             0 & 3 & 0 \\
             0 & 0 & 4
         \end{pmatrix}$
+        \pause
         \item Distance (in $A$-norm): $1.29099$
         \end{itemize}
+        \pause
         \item $\ell_1$-norm$\implies \phi^\mathcal{W}_{\ell_1}(w_I) = (1,1,0)$
         \begin{itemize}
+            \pause
             \item Distance (in $A$-norm): $1.41421$
         \end{itemize}
     \end{itemize}
@@ -734,24 +853,24 @@
 %------------------------------------------------
 
 \begin{frame}{Integer nucleolus}
-    %\pause
+    \pause
 
     \begin{block}{Integer nucleolus}
+        \pause
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$, the \textbf{integer nucleolus} $\eta_\Z(G_I)$ is defined as
         \begin{displaymath}
             \eta_{\Z}(G_I) = \left\{ x \in \mathcal{I}_\Z(G_I) \mid \forall y \in \mathcal{I}_\Z(G_I): \Theta(x) \preceq_{lex} \Theta(y)\right\}.
         \end{displaymath}
     \end{block}
 
-    %\pause
+    \pause
 
-    \begin{itemize}
-        \item When does it exist?
-    \end{itemize}
+    \textit{When does it exist?}
 
-    %\pause
+    \pause
 
-    \begin{block}{Theorem $25$ - $26$}
+    \begin{block}{Integer nucleolus - existence}
+        \pause
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
 
         \begin{displaymath}
@@ -771,20 +890,26 @@
 %------------------------------------------------
 
 \begin{frame}{Integer nucleolus}
-    \begin{block}{Theorem $25$ - $26$}
+    \pause
+    \begin{block}{Integer nucleolus - existence}
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
 
         \begin{displaymath}
             \mathcal{I}_{\Z}(G_I) \neq \emptyset \implies \eta_\Z(G_I) \neq \emptyset.
         \end{displaymath}
     \end{block}
+    \pause
     Proof:
+    \pause
     \begin{itemize}
         \item Lexicographical ordering on finite vectors $\implies$ vectors are comparable,
+        \pause
         \item $\mathcal{I}_{\Z}(G_I)$ is finite $\implies$ in finite number of steps we reach the minimum.
     \end{itemize}
 
+    \pause
     \begin{block}{Corollary}
+        \pause
         \begin{displaymath}
             \mathcal{I}_{\Z}(G_I) \neq \emptyset \iff \eta_\Z(G_I) \neq \emptyset
         \end{displaymath}
@@ -796,14 +921,21 @@
 %------------------------------------------------
 
 \begin{frame}{Integer nucleolus}
-    \begin{block}{Theorem $25$ - $26$}
+    \pause
+    \begin{block}{Integer nucleolus - existence}
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$, it holds
 
         \begin{displaymath}
             \eta_\Z(G_I) \neq \emptyset \iff \eta(G_I) \neq \emptyset.
         \end{displaymath}
     \end{block}
+
+    \pause
+
     Proof:
+
+    \pause
+
     \begin{displaymath}
         \eta_\Z(G_I) \neq \emptyset \iff \mathcal{I}_{\Z}(G_I) \neq \emptyset \iff \mathcal{I}(G_I) \iff \eta(G_I) \neq \emptyset
     \end{displaymath}
@@ -814,15 +946,21 @@
 %------------------------------------------------
 
 \begin{frame}{Integer nucleolus - properties}
-    %\pause
+    \pause
 
     \textit{We lose the uniqueness...}
 
-    %\pause
-    \begin{block}{Theorem $27$}
+    \pause
+    \begin{block}{Nucleolus - properties}
+        \pause
         For an integer cooperative game $G_I \in \mathcal{G}_I^n$ the nucleolus is not necessarily a single point solution concept.
     \end{block}
+
+    \pause
+
     Proof:
+
+    \pause
 
 \begin{table}[h]
     \caption{Excesses of Example 1}
